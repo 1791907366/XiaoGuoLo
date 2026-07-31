@@ -1,0 +1,258 @@
+/* ============================================================
+   PbootCMS 登录页样式 — 现代毛玻璃设计
+   ============================================================ */
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #0F172A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景：动态浮动光斑（灵动呼吸效果） */
+body::before,
+body::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  animation: blobFloat 18s ease-in-out infinite alternate;
+}
+body::before {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(59,130,246,.55), transparent 70%);
+  top: -120px;
+  left: -100px;
+}
+body::after {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(96,165,250,.45), transparent 70%);
+  bottom: -100px;
+  right: -80px;
+  animation-delay: -6s;
+  animation-duration: 22s;
+}
+
+/* 额外两层小光斑增加层次感 */
+.user-login::before,
+.user-login::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  pointer-events: none;
+  animation: blobFloat 14s ease-in-out infinite alternate;
+}
+.user-login::before {
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(14,165,233,.35), transparent 70%);
+  top: 20%;
+  right: 12%;
+  animation-delay: -3s;
+}
+.user-login::after {
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(45,212,191,.3), transparent 70%);
+  bottom: 15%;
+  left: 10%;
+  animation-delay: -9s;
+}
+
+@keyframes blobFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -30px) scale(1.15); }
+  100% { transform: translate(-30px, 25px) scale(.95); }
+}
+
+.user-login {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.user-login-main {
+  position: relative;
+  z-index: 2;
+  width: 400px;
+  max-width: 100%;
+  background: rgba(255, 255, 255, .1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 16px;
+  padding: 36px 32px 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+  animation: cardIn .6s cubic-bezier(.16, 1, .3, 1);
+}
+
+/* 登录卡片入场动画 */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(24px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.user-login-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.user-login-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.user-login-header h2 img {
+  height: 36px;
+}
+.user-login-header p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, .6);
+  margin: 0;
+}
+
+.user-login-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 表单项 */
+.user-login-box .layui-form-item {
+  position: relative;
+  margin: 0;
+}
+.user-login-box .layui-form-item .layui-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 16px 0 42px;
+  font-size: 14px;
+  color: #fff;
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 10px;
+  outline: none;
+  transition: all .25s ease;
+  box-sizing: border-box;
+}
+.user-login-box .layui-form-item .layui-input::placeholder {
+  color: rgba(255, 255, 255, .4);
+}
+.user-login-box .layui-form-item .layui-input:focus {
+  border-color: rgba(255, 255, 255, .5);
+  background: rgba(255, 255, 255, .15);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .08);
+}
+
+/* 图标 */
+.user-login-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, .4);
+  font-size: 18px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 验证码 */
+.user-login-codeimg {
+  height: 44px;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  box-sizing: border-box;
+  object-fit: cover;
+}
+.layui-col-xs5 .user-login-codeimg {
+  height: 44px;
+}
+
+/* 登录按钮 */
+.user-login-box .layui-btn {
+  width: 100%;
+  height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #2563EB, #3B82F6);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .25s ease;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, .4);
+}
+.user-login-box .layui-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, .5);
+}
+.user-login-box .layui-btn:active {
+  transform: translateY(0);
+}
+
+/* 错误提示 */
+#note {
+  text-align: center;
+  font-size: 13px;
+  color: #FCA5A5 !important;
+  min-height: 20px;
+}
+
+/* 底部信息 */
+.user-login-footer {
+  text-align: center;
+  padding: 20px 0 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, .4);
+}
+.user-login-footer a {
+  color: rgba(255, 255, 255, .5);
+  transition: color .2s;
+}
+.user-login-footer a:hover {
+  color: #fff;
+}
+.user-login-footer span {
+  padding: 0 8px;
+}
+
+/* 响应式 */
+@media screen and (max-width: 480px) {
+  .user-login-main {
+    padding: 28px 20px 24px;
+    border-radius: 12px;
+  }
+  .user-login-header h2 {
+    font-size: 19px;
+  }
+  .user-login-box .layui-form-item .layui-input {
+    height: 40px;
+    font-size: 13px;
+  }
+  .user-login-box .layui-btn {
+    height: 40px;
+    font-size: 14px;
+  }
+}

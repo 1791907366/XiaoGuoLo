@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pbootcms后台美化 — 使用教程</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #F3F6FB;
+    color: #1F2937;
+    line-height: 1.8;
+    padding: 30px 16px 60px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  .top {
+    background: linear-gradient(135deg, #1D4ED8, #2563EB 55%, #3B82F6);
+    color: #fff;
+    border-radius: 16px;
+    padding: 34px 36px;
+    margin-bottom: 26px;
+    box-shadow: 0 10px 30px rgba(37,99,235,.25);
+  }
+  .top h1 { font-size: 26px; margin-bottom: 6px; }
+  .top p { opacity: .85; font-size: 14px; }
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 26px 30px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 10px rgba(17,24,39,.06);
+    border: 1px solid #E5E7EB;
+  }
+  h2 {
+    font-size: 19px;
+    color: #1D4ED8;
+    margin-bottom: 14px;
+    padding-left: 12px;
+    border-left: 4px solid #2563EB;
+  }
+  h3 { font-size: 16px; margin: 16px 0 8px; color: #374151; }
+  p, li { font-size: 15px; }
+  ul, ol { padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid #E5E7EB;
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #EFF6FF; color: #1D4ED8; white-space: nowrap; }
+  tr:nth-child(even) td { background: #FAFBFC; }
+  code {
+    background: #EFF6FF;
+    color: #1D4ED8;
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-family: Consolas, Menlo, monospace;
+    font-size: 13px;
+    word-break: break-all;
+  }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .step .num {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563EB, #3B82F6);
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    margin-top: 2px;
+  }
+  .step .txt { padding-top: 3px; }
+  .tip {
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    color: #166534;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    margin: 10px 0;
+  }
+  .warn {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    color: #92400E;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    margin: 10px 0;
+  }
+  .path { background: #F3F4F6; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #4B5563; margin: 8px 0; word-break: break-all; }
+  .ok { color: #059669; font-weight: 600; }
+  .footer { text-align: center; color: #9CA3AF; font-size: 13px; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <h1>🖥️ pbootcms后台美化教程</h1>
+    <p>这个教程会告诉您：包里有什么、改了什么、怎么装回去、出问题了怎么办。<br>全程大白话，照着做就行，一般 5 分钟搞定。</p>
+  </div>
+
+  <div class="card">
+    <h2>一、这个文件包里有什么</h2>
+    <p>文件夹 <code>a3后台美化文件包</code>（以及它的压缩包 <code>a3后台美化文件包.zip</code>）里，一共包含 <b>8 个文件</b>，都是网站后台（PbootCMS 管理系统）的页面和样式文件：</p>
+    <table>
+      <tr><th>包里的文件路径</th><th>它是干什么的</th></tr>
+      <tr><td>apps/admin/view/default/<b>index.html</b></td><td>后台<b>登录页面</b>（输用户名密码的地方）</td></tr>
+      <tr><td>apps/admin/view/default/<b>common/head.html</b></td><td>后台<b>公共头部</b>：顶部导航栏 + 左侧菜单栏</td></tr>
+      <tr><td>apps/admin/view/default/<b>common/foot.html</b></td><td>后台<b>公共底部</b>：加载各种 JS 脚本</td></tr>
+      <tr><td>apps/admin/view/default/<b>css/login.css</b></td><td>登录页的<b>样式</b>：毛玻璃卡片、蓝色渐变按钮、动感背景</td></tr>
+      <tr><td>apps/admin/view/default/<b>css/comm.css</b></td><td>后台<b>整体样式</b>：卡片化布局、圆角、柔和阴影、现代蓝色主题</td></tr>
+      <tr><td>apps/admin/view/default/<b>js/comm.js</b></td><td>后台<b>交互脚本</b>：侧边栏显示/隐藏、菜单高亮等</td></tr>
+      <tr><td>apps/admin/view/default/<b>js/mylayui.js</b></td><td>后台<b>功能脚本</b>：登录验证、选项卡切换等</td></tr>
+      <tr><td>apps/admin/view/default/<b>content/delecache.html</b></td><td>“<b>清理缓存</b>”页面：美化了一下按钮样式</td></tr>
+    </table>
+    <p class="tip">👍 简单记：包里就是“登录页 + 后台框架”的页面和样式，只动了表面外观，<b>没有动任何数据</b>，放心使用。</p>
+  </div>
+
+  <div class="card">
+    <h2>二、具体美化了哪些地方</h2>
+    <ul>
+      <li>🔑 <b>登录页</b>：深蓝渐变背景 + 会浮动呼吸的光斑动画；登录框做成半透明“毛玻璃”卡片，带圆角和入场动画；输入框、按钮全部换成了现代风格，按钮是蓝色渐变。</li>
+      <li>🧭 <b>顶部导航栏</b>：白色底、细边框、柔和阴影；左侧 LOGO 区深色打底，加了网站图标和版本号徽章。</li>
+      <li>📂 <b>左侧菜单栏</b>：深色侧边栏，菜单项悬停高亮，移动端自动隐藏，和原来一样能点按钮折叠。</li>
+      <li>🎨 <b>整体风格</b>：全后台换成统一的蓝色主题，表格、按钮、卡片都做成圆角 + 柔和阴影，字体用系统默认字体，更清爽耐看。</li>
+      <li>🧹 <b>清理缓存页</b>：按钮改成圆角绿色胶囊按钮，悬停有轻微上浮效果。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>三、怎么把美化效果装到网站里（三步）</h2>
+
+    <div class="step">
+      <div class="num">1</div>
+      <div class="txt"><b>先备份（强烈建议，防后悔）</b><br>
+        打开网站目录（也就是放网站程序的那个文件夹），找到后台模板文件夹：<br>
+        <div class="path">网站根目录\apps\admin\view\default</div>
+        把整个 <code>default</code> 文件夹 <b>复制一份</b> 到桌面上，比如改名叫 <code>default_备份</code>。<br>
+        万一以后想还原，把备份里的文件再复制回去就行。</div>
+    </div>
+
+    <div class="step">
+      <div class="num">2</div>
+      <div class="txt"><b>复制文件、覆盖同名文件</b><br>
+        把包里 <code>apps\admin\view\default</code> 下面的 8 个文件，<b>按同样的目录结构</b> 复制到网站目录的相同位置，提示“是否覆盖”时选 <b>是</b>。<br>
+        <div class="path">例如：包的 <code>css\comm.css</code> → 覆盖到网站根目录的 <code>apps\admin\view\default\css\comm.css</code></div>
+        位置一定要放对，放错位置后台会显示不出效果。</div>
+    </div>
+
+    <div class="step">
+      <div class="num">3</div>
+      <div class="txt"><b>清缓存 + 刷新页面</b><br>
+        ① 打开后台，点左上角“<b>清理缓存</b>”，把缓存清理一下；<br>
+        ② 浏览器里按 <code>Ctrl + F5</code> 强制刷新；<br>
+        ③ 重新打开后台地址（比如 <code>http://您的域名/admin</code>，把“您的域名”换成您网站自己的域名），就能看到新的登录页和后台界面啦！</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>四、常见问题（先别慌）</h2>
+    <table>
+      <tr><th>问题</th><th>解决办法</th></tr>
+      <tr><td>页面还是老样子，没变化？</td><td>多半是缓存没清干净。清一下后台缓存，再按 <code>Ctrl+F5</code> 强刷；也可以删除网站里 <code>runtime/complile</code> 文件夹下的缓存文件再刷新。</td></tr>
+      <tr><td>覆盖后页面乱了/错位？</td><td>检查文件是不是复制到了正确位置、路径和包里一致。改错也不怕，把第 1 步的备份复制回去即可恢复原样。</td></tr>
+      <tr><td>后台打不开了？</td><td>先看是不是文件放错了位置（多套了一层文件夹最常见）。用备份恢复后应该就正常了。</td></tr>
+      <tr><td>以后升级 PbootCMS 会不会变回去？</td><td>有可能会，因为升级会覆盖模板文件。升级后重新按本教程复制一遍即可。</td></tr>
+    </table>
+    <p class="warn">⚠️ 注意：本美化<b>只动了后台界面的外观</b>，不影响任何数据、会员、订单等信息。包里没有、也请不要删除或修改后台其它文件。</p>
+  </div>
+
+  <div class="card">
+    <h2>五、技术支持</h2>
+    <p>使用过程中遇到任何问题，都可以点击下面的按钮联系技术支持：</p>
+    <p style="margin-top:12px;">
+      <a href="https://rx9xh3hmbq.coze.site/" target="_blank" rel="noopener" style="display:inline-block;background:linear-gradient(135deg,#2563EB,#3B82F6);color:#fff;padding:12px 30px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px;box-shadow:0 4px 15px rgba(37,99,235,.35);">🛠️ 联系技术支持</a>
+    </p>
+    <p style="margin-top:12px;font-size:14px;color:#6B7280;">技术支持网址：<a href="https://rx9xh3hmbq.coze.site/" target="_blank" rel="noopener" style="color:#2563EB;">https://rx9xh3hmbq.coze.site/</a></p>
+  </div>
+
+  <div class="footer">— 本教程由 pbootcms后台美化整理 · 文件包与教程都在桌面 · 技术支持：https://rx9xh3hmbq.coze.site/ · 2026-07-31 —</div>
+
+</div>
+</body>
+</html>

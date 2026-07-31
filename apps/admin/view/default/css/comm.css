@@ -1,0 +1,1050 @@
+/* ============================================================
+   PbootCMS 现代管理后台样式 v3.1
+   设计：卡片化 · 圆角 · 柔和阴影 · 现代配色
+   注意：布局定位遵循 LayUI 原生机制（left/width 由 comm.js 控制）
+   ============================================================ */
+
+/* ---------- CSS 自定义属性 ---------- */
+:root {
+  --primary: #2563EB;
+  --primary-light: #60A5FA;
+  --primary-dark: #1D4ED8;
+  --primary-bg: #EFF6FF;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --info: #3B82F6;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;
+  --gray-900: #111827;
+  --radius: 8px;
+  --radius-sm: 6px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+  --transition: all .2s ease;
+}
+
+/* ---------- 全局 ---------- */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-700);
+  font-size: 14px;
+  line-height: 1.6;
+}
+a { color: var(--primary); text-decoration: none; transition: var(--transition); }
+a:hover { color: var(--primary-dark); }
+img { border: none; }
+
+/* ============================================================
+   布局 — 遵循 LayUI 原生定位（fixed/absolute + left），
+   仅调整颜色、宽度、高度与阴影，确保 comm.js 侧栏动画正常
+   ============================================================ */
+
+/* 头部 */
+.layui-layout-admin .layui-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 1000;
+  background: #fff !important;
+  border-bottom: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+}
+
+/* Logo */
+.layui-layout-admin .layui-logo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 60px;
+  z-index: 1001;
+  padding: 0 16px;
+  background: var(--gray-900) !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 600;
+  line-height: 60px !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.layui-layout-admin .layui-logo a {
+  color: #fff !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.layui-layout-admin .layui-logo img {
+  height: 26px;
+  flex-shrink: 0;
+  margin-top: 0 !important;
+  vertical-align: middle;
+}
+.layui-layout-admin .layui-logo .layui-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+/* 菜单切换按钮（汉堡）— logo 为 fixed 脱离文档流，需绝对定位紧随其后 */
+.menu {
+  position: absolute !important;
+  left: 210px;
+  top: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex-shrink: 0;
+  z-index: 1002;
+}
+.menu-ico {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--gray-500);
+  border-radius: var(--radius-sm);
+  font-size: 18px;
+  transition: var(--transition);
+}
+.menu-ico:hover {
+  background: var(--gray-100);
+  color: var(--gray-700);
+}
+
+/* 区域切换 — 紧随汉堡按钮之后 */
+.area-select {
+  position: absolute;
+  left: 260px;
+  top: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  flex-shrink: 0;
+  z-index: 1002;
+}
+.area-select select {
+  height: 32px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 0 8px;
+  background: #fff;
+  color: var(--gray-700);
+  font-size: 13px;
+  outline: none;
+  transition: var(--transition);
+}
+.area-select select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+.area-select .layui-btn-sm {
+  height: 32px !important;
+  line-height: 32px !important;
+  padding: 0 14px !important;
+  border-radius: var(--radius-sm) !important;
+  font-size: 13px !important;
+}
+
+/* 头部导航重置（覆盖 layui-nav 深色背景） */
+.layui-header .layui-nav {
+  background: transparent !important;
+  border-radius: 0;
+}
+.layui-layout-admin .layui-header .layui-nav .layui-nav-item {
+  background: transparent !important;
+  height: 60px;
+  line-height: 60px;
+}
+.layui-layout-right {
+  margin-left: auto;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.layui-layout-right .layui-nav-item {
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+.layui-layout-right .layui-nav-item > a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  color: var(--gray-600) !important;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  transition: var(--transition);
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.layui-layout-right .layui-nav-item > a:hover {
+  background: var(--gray-100);
+  color: var(--gray-900) !important;
+}
+.layui-layout-right .layui-nav-item > a i { font-size: 15px; }
+
+/* 顶部用户下拉菜单 */
+.layui-layout-right .layui-nav-child {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: auto;
+  min-width: 160px;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 4px;
+  z-index: 1000;
+  margin-top: 4px;
+}
+.layui-layout-right .layui-nav-item:hover > .layui-nav-child {
+  display: block;
+}
+.layui-layout-right .layui-nav-child dd { list-style: none; }
+.layui-layout-right .layui-nav-child dd a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  color: var(--gray-600) !important;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  transition: var(--transition);
+}
+.layui-layout-right .layui-nav-child dd a:hover {
+  background: var(--gray-100);
+  color: var(--gray-900) !important;
+}
+.layui-layout-right .layui-nav-child dd a i {
+  width: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* ---------- 侧边栏 ---------- */
+.layui-layout-admin .layui-side {
+  position: fixed;
+  left: 0;
+  top: 60px;
+  bottom: 0;
+  width: 200px;
+  z-index: 999;
+  overflow-x: hidden;
+  background: var(--gray-900) !important;
+}
+.layui-side-scroll {
+  position: relative;
+  width: 200px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.layui-side-scroll::-webkit-scrollbar { width: 4px; }
+.layui-side-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 2px; }
+
+/* 侧栏导航 */
+.layui-nav-tree {
+  width: 200px;
+  background: transparent !important;
+}
+.layui-nav-tree .nav-item {
+  margin: 2px 8px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: var(--transition);
+}
+.layui-nav-tree .nav-item > a {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px !important;
+  color: rgba(255,255,255,.72) !important;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+/* 父项右侧展开箭头（FontAwesome 下箭头），展开时旋转 180° */
+.layui-nav-tree .nav-item > a::after {
+  content: '\f107';
+  font-family: FontAwesome;
+  margin-left: auto;
+  font-size: 13px;
+  opacity: .45;
+  transition: transform .3s ease, opacity .3s ease;
+}
+.layui-nav-tree .nav-item.layui-nav-itemed > a::after {
+  transform: rotate(180deg);
+  opacity: .85;
+}
+.layui-nav-tree .nav-item > a:hover {
+  color: #fff !important;
+  background: rgba(255,255,255,.08) !important;
+}
+.layui-nav-tree .nav-item > a i {
+  width: 20px;
+  text-align: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.layui-nav-tree .nav-item.layui-nav-itemed > a {
+  color: #fff !important;
+  background: rgba(255,255,255,.06) !important;
+}
+
+/* 侧栏子菜单 — 点击展开（layui 自动切换 layui-nav-itemed），保持原生机制 */
+.layui-nav-tree .layui-nav-child {
+  position: static !important;
+  display: none !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 0 4px 26px !important;
+  margin: 0 !important;
+}
+.layui-nav-tree .layui-nav-itemed > .layui-nav-child {
+  display: block !important;
+  animation: navChildIn .3s ease;
+  transform-origin: top;
+}
+/* 子菜单展开动画：淡入 + 轻微下滑 */
+@keyframes navChildIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.layui-nav-tree .layui-nav-child dd {
+  padding: 0 !important;
+  margin: 1px 0;
+}
+.layui-nav-tree .layui-nav-child dd a {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px !important;
+  color: rgba(255,255,255,.55) !important;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  transition: var(--transition);
+}
+.layui-nav-tree .layui-nav-child dd a:hover {
+  color: #fff !important;
+  background: rgba(255,255,255,.08) !important;
+}
+.layui-nav-tree .layui-nav-child dd a i {
+  font-size: 13px;
+  width: 16px;
+  text-align: center;
+}
+.layui-nav-tree .layui-nav-child dd.layui-this a {
+  color: #fff !important;
+  background: var(--primary) !important;
+  font-weight: 500;
+}
+
+/* 覆盖 layui 原生菜单选中项的绿色背景（#5FB878），统一为蓝色主题色 */
+.layui-nav .layui-nav-child dd.layui-this a,
+.layui-nav-child dd.layui-this {
+  background-color: var(--primary) !important;
+  color: #fff !important;
+}
+
+/* ---------- 主体 ---------- */
+.layui-layout-admin .layui-body {
+  position: absolute;
+  left: 200px;
+  right: 0;
+  top: 60px;
+  bottom: 0;
+  overflow-y: auto;
+  background: var(--gray-50);
+  padding: 20px 24px;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   内容组件美化
+   ============================================================ */
+
+/* 卡片容器 */
+.layui-tab {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  /* 注意：不能加 overflow:hidden，否则内部 select 下拉列表（绝对定位）会被裁剪/遮挡 */
+  margin-bottom: 20px;
+  animation: cardFadeIn .35s ease;
+  transition: box-shadow .25s ease;
+}
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.layui-tab:hover {
+  box-shadow: var(--shadow-md);
+}
+.layui-tab-title {
+  display: flex;
+  border-bottom: 1px solid var(--gray-200);
+  background: #fff;
+  padding: 0 4px;
+  overflow-x: auto;
+  position: relative;
+}
+/* 固定高度 + inline-flex 垂直居中，避免点击时文字错位/跳动 */
+.layui-tab-title li {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 46px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: color .25s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+/* 取消选中态下划线指示条（用户要求移除该跟随效果），
+   用 !important 覆盖 layui 原生 .layui-tab-brief 的绿色下划线规则 */
+.layui-tab-title li::after,
+.layui-tab-title .layui-this:after,
+.layui-tab-brief>.layui-tab-title .layui-this:after {
+  content: none !important;
+  display: none !important;
+}
+.layui-tab-title li:hover { color: var(--gray-700); }
+/* 激活项不加粗（加粗会改变文字宽度导致错位），仅以颜色区分；
+   用 !important 覆盖 layui 原生 .layui-tab-brief 选中项绿色文字 */
+.layui-tab-title li.layui-this {
+  color: var(--primary) !important;
+}
+.layui-tab-title li.layui-this::after {
+  transform: translateX(-50%) scaleX(1);
+  display: none !important;
+}
+/* 内容切换淡入动画 */
+.layui-tab-item.layui-show {
+  animation: tabFadeIn .3s ease;
+}
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.layui-tab-content { padding: 20px; }
+
+/* 表格 */
+.layui-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.layui-table thead { background: var(--gray-50); }
+.layui-table thead th {
+  padding: 10px 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-200);
+  text-align: left;
+  white-space: nowrap;
+}
+.layui-table tbody tr { transition: var(--transition); }
+.layui-table tbody tr:hover { background: var(--gray-50); }
+.layui-table tbody td {
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-100);
+  vertical-align: middle;
+}
+.layui-table tbody tr:last-child td { border-bottom: none; }
+.layui-table .layui-btn { margin: 1px 2px; }
+
+/* 表单 */
+.layui-form-label {
+  width: 130px;
+  float: left;
+  padding: 8px 15px 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-800);
+  text-align: right;
+  line-height: 38px;
+  box-sizing: border-box;
+}
+.layui-input-block {
+  margin-left: 130px; /* 与 label 总宽（border-box 130px）对齐 */
+  min-height: 36px;
+}
+.layui-input,
+.layui-textarea {
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 0 14px;
+  font-size: 14px;
+  color: var(--gray-800);
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  outline: none;
+  transition: var(--transition);
+  box-sizing: border-box;
+}
+.layui-input:hover, .layui-textarea:hover {
+  border-color: var(--gray-300);
+}
+.layui-input:focus, .layui-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+.layui-textarea { height: auto; min-height: 96px; padding: 10px 14px; resize: vertical; line-height: 1.7; }
+.layui-input-inline { display: inline-block; vertical-align: middle; margin-right: 8px; width: 260px; }
+.layui-input-inline .layui-input { width: 100%; }
+.layui-form-item { margin-bottom: 14px; clear: both; }
+.layui-form-item::after { content: ''; display: table; clear: both; }
+.layui-form-item.nospace { margin-bottom: 10px; }
+.readonly {
+  background: var(--gray-100) !important;
+  color: var(--gray-500) !important;
+  cursor: not-allowed;
+}
+
+/* 单选框 */
+input[type=radio] {
+  accent-color: var(--primary);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+.layui-form-radio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+  margin-right: 8px;
+}
+.layui-form-radio i {
+  font-size: 18px;
+  line-height: 16px;
+  color: var(--gray-400);
+  transition: var(--transition);
+}
+.layui-form-radio:hover i { color: var(--primary); }
+.layui-form-radioed i { color: var(--primary); }
+/* radio 文字实际渲染在 div 中（非 span），黑色加粗 + 居中 */
+.layui-form-radio div,
+.layui-form-radio span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-800) !important;
+}
+
+/* 提示图标 */
+.layui-icon-about.tips {
+  color: var(--gray-400);
+  cursor: pointer;
+  font-size: 16px;
+  transition: var(--transition);
+  vertical-align: middle;
+}
+.layui-icon-about.tips:hover { color: var(--primary); }
+
+/* 下拉选择：遵循 layui 原版逻辑（top:42px 向下展开，页面/容器滚动可见），
+   仅提升层级与高度，与原版 comm.css 保持一致 */
+.layui-form-select dl {
+  z-index: 9999;
+  max-height: 250px;
+}
+.layui-form-select dl dd {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--gray-600);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+.layui-form-select dl dd:hover { background: var(--primary-bg); color: var(--primary); }
+.layui-form-select dl dd.layui-this { background: var(--primary-bg); color: var(--primary); font-weight: 500; }
+
+/* 复选框美化 — 原生 + layui 渲染双模式
+   功能按钮/权限多选项统一为现代圆角胶囊标签样式 */
+input[type=checkbox] {
+  accent-color: var(--primary);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+/* LayUI 渲染后的胶囊标签 */
+.layui-form-checkbox {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 30px;
+  padding: 0 14px !important;
+  margin: 0 8px 8px 0 !important;
+  border: 1px solid var(--gray-200) !important;
+  border-radius: 999px !important;
+  background: #fff !important;
+  cursor: pointer;
+  user-select: none;
+  transition: all .2s ease;
+  line-height: normal !important;
+  box-sizing: border-box;
+}
+.layui-form-checkbox:hover {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+/* 图标：覆盖 layui 原生的绝对定位方块（小白框），保留对勾字形 */
+.layui-form-checkbox i {
+  position: static !important;
+  display: inline-block;
+  width: auto !important;
+  height: auto !important;
+  border: none !important;
+  background: transparent !important;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1;
+  color: var(--gray-400);
+  transition: color .2s ease;
+}
+.layui-form-checkbox:hover i { color: var(--primary); }
+/* span 显式垂直居中：覆盖 layui 原生的 height:100%/继承行高，确保文字在框内上下对齐 */
+.layui-form-checkbox span {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--gray-800) !important;
+  background: transparent !important;
+  transition: color .2s ease;
+  white-space: nowrap;
+}
+/* 选中态：蓝色实心胶囊 + 白色文字 + 对勾 */
+.layui-form-checked,
+.layui-form-checked:hover {
+  border-color: var(--primary) !important;
+  background: var(--primary) !important;
+  box-shadow: 0 2px 6px rgba(37,99,235,.25);
+}
+.layui-form-checked i,
+.layui-form-checked:hover i {
+  color: #fff !important;
+}
+.layui-form-checked span,
+.layui-form-checked:hover span {
+  color: #fff !important;
+  background: transparent !important;
+}
+
+/* ========== 文章参数三色胶囊标签（置顶=橙 / 推荐=金 / 头条=蓝） ========== */
+.layui-form-item input[name=istop] + .layui-form-checkbox { --tag: #FF5722; --tag-bg: #FFF3EF; --tag-glow: rgba(255,87,34,.15); }
+.layui-form-item input[name=isrecommend] + .layui-form-checkbox { --tag: #FFB800; --tag-bg: #FFF8E0; --tag-glow: rgba(255,184,0,.15); }
+.layui-form-item input[name=isheadline] + .layui-form-checkbox { --tag: #1E9FFF; --tag-bg: #E8F5FF; --tag-glow: rgba(30,159,255,.15); }
+
+.layui-form-item input[name=istop] + .layui-form-checkbox,
+.layui-form-item input[name=isrecommend] + .layui-form-checkbox,
+.layui-form-item input[name=isheadline] + .layui-form-checkbox {
+  border-color: var(--tag) !important;
+  background: var(--tag-bg) !important;
+}
+.layui-form-item input[name=istop] + .layui-form-checkbox span,
+.layui-form-item input[name=isrecommend] + .layui-form-checkbox span,
+.layui-form-item input[name=isheadline] + .layui-form-checkbox span,
+.layui-form-item input[name=istop] + .layui-form-checkbox i,
+.layui-form-item input[name=isrecommend] + .layui-form-checkbox i,
+.layui-form-item input[name=isheadline] + .layui-form-checkbox i {
+  color: var(--tag) !important;
+}
+.layui-form-item input[name=istop] + .layui-form-checkbox:hover,
+.layui-form-item input[name=isrecommend] + .layui-form-checkbox:hover,
+.layui-form-item input[name=isheadline] + .layui-form-checkbox:hover {
+  border-color: var(--tag) !important;
+  box-shadow: 0 0 0 3px var(--tag-glow);
+}
+/* 选中态：实心主题色 */
+.layui-form-item input[name=istop] + .layui-form-checkbox.layui-form-checked,
+.layui-form-item input[name=istop] + .layui-form-checkbox.layui-form-checked:hover,
+.layui-form-item input[name=isrecommend] + .layui-form-checkbox.layui-form-checked,
+.layui-form-item input[name=isrecommend] + .layui-form-checkbox.layui-form-checked:hover,
+.layui-form-item input[name=isheadline] + .layui-form-checkbox.layui-form-checked,
+.layui-form-item input[name=isheadline] + .layui-form-checkbox.layui-form-checked:hover {
+  background: var(--tag) !important;
+  border-color: var(--tag) !important;
+  box-shadow: 0 2px 6px var(--tag-glow);
+}
+.layui-form-item input[name=istop] + .layui-form-checked span,
+.layui-form-item input[name=istop] + .layui-form-checked i,
+.layui-form-item input[name=isrecommend] + .layui-form-checked span,
+.layui-form-item input[name=isrecommend] + .layui-form-checked i,
+.layui-form-item input[name=isheadline] + .layui-form-checked span,
+.layui-form-item input[name=isheadline] + .layui-form-checked i {
+  color: #fff !important;
+}
+
+/* 按钮 */
+.layui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: var(--primary);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  user-select: none;
+  box-sizing: border-box;
+}
+.layui-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  color: #fff;
+}
+.layui-btn:active { transform: translateY(0); }
+.layui-btn-sm { height: 32px; padding: 0 14px; font-size: 12px; border-radius: 8px; }
+.layui-btn-xs { height: 26px; padding: 0 10px; font-size: 11px; border-radius: 7px; }
+.layui-btn-primary {
+  background: #fff;
+  color: var(--gray-600);
+  border: 1px solid var(--gray-200);
+}
+.layui-btn-primary:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-300);
+  color: var(--gray-700);
+  box-shadow: none;
+  transform: none;
+}
+.layui-btn-fluid { width: 100%; }
+.layui-btn-normal { background: var(--info); }
+.layui-btn-normal:hover { background: #2563EB; }
+.layui-btn-warm { background: var(--warning); }
+.layui-btn-warm:hover { background: #D97706; }
+.layui-btn-danger { background: var(--danger); }
+.layui-btn-danger:hover { background: #DC2626; }
+
+/* 徽标 */
+.layui-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--primary);
+  border-radius: 10px;
+  line-height: 1.4;
+}
+.layui-bg-gray { background: var(--gray-200); color: var(--gray-600); }
+.layui-bg-green, .layui-bg-blue { background: var(--success); }
+.layui-bg-orange { background: var(--warning); }
+.layui-bg-red { background: var(--danger); }
+.layui-bg-black { background: var(--gray-800); }
+
+/* 引用块 */
+.layui-elem-quote {
+  padding: 12px 16px;
+  background: var(--primary-bg);
+  border-left: 3px solid var(--primary);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--gray-600);
+  margin-bottom: 16px;
+}
+.layui-text-red { color: var(--danger); }
+.layui-text-red a { color: var(--danger); }
+
+/* 分页 */
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+/* 按钮外观：只给外层 span（首页/前/后/尾/状态）和页码，避免内层 a 再套按钮 */
+.page > span:not(.page-numbar),
+.page .page-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  font-size: 13px;
+  color: var(--gray-600);
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+/* 页码容器不显示为按钮，让内部页码直接参与 flex 排列 */
+.page-numbar {
+  display: contents;
+}
+/* 外层按钮内的链接：透明填充整个按钮，不再套第二个按钮 */
+.page > span:not(.page-numbar) > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+}
+.page > span:not(.page-numbar):hover,
+.page .page-num:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  z-index: 1;
+}
+.page .page-num-current {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+.page .page-num-current:hover { color: #fff; }
+
+/* 桌面快捷图标 */
+.deskbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  transition: var(--transition);
+  cursor: pointer;
+  margin: 6px 0;
+}
+.deskbox:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.deskbox dt { font-size: 13px; color: var(--gray-500); margin-bottom: 4px; }
+.deskbox dd { font-size: 28px; font-weight: 700; color: var(--primary); }
+
+/* 图片上传预览：与路径框左对齐 */
+.pic {
+  margin-left: 130px;
+  clear: both;              /* 强制换行到按钮下方，避免与上传按钮同行 */
+  width: calc(100% - 130px); /* 占满剩余宽度 */
+  text-align: left;         /* 内联内容一律左对齐 */
+}
+/* dl 简洁展示：float:left 左对齐排列（原版布局），无边框无阴影，删除按钮悬浮右上角 */
+.pic dl {
+  position: relative;
+  float: left;
+  margin: 0 5px 5px 0; /* 图片间留 5px 间距 */
+  text-align: left;
+  background: transparent;
+}
+/* 清除浮动，防止后续元素错位 */
+.pic::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.pic dl dt { padding: 0; }
+.pic dl dt img {
+  max-height: 100px;
+  margin: 5px 0;
+  margin-right: 5px; /* 恢复原版排列：图片紧凑左对齐 */
+  display: block;
+  border-radius: 6px;
+}
+/* 多图备注输入框现代化：圆角 + 浅底 + focus 蓝色光环 */
+.pic dl dt input[type=text] {
+  width: 95% !important; /* 保持模板内联宽度 */
+  height: 30px;
+  margin-top: 6px;
+  padding: 0 8px;
+  font-size: 12px;
+  color: var(--gray-700);
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.pic dl dt input[type=text]:focus {
+  border-color: var(--primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--primary-bg);
+}
+.pic dl dd {
+  position: absolute;
+  top: 5px;  /* 与图片 margin-top 对齐，× 落在图片右上角 */
+  right: 5px; /* 与图片 margin-right 对齐 */
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FA5151; /* 无背景框，纯文字 × */
+  font-size: 0; /* 隐藏"删除"文字 */
+  cursor: pointer;
+  transition: color .2s ease;
+  z-index: 1;
+  text-shadow: 0 0 3px rgba(255,255,255,.95), 0 0 1px rgba(255,255,255,.95);
+}
+/* 用 × 符号代替"删除"文字，水平垂直居中 */
+.pic dl dd::after {
+  content: '×';
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 600;
+}
+.pic dl dd:hover { color: var(--danger); }
+
+/* 开关切换 */
+.fa-toggle-on {
+  font-size: 20px;
+  color: var(--success);
+  vertical-align: middle;
+}
+.fa-toggle-off {
+  font-size: 20px;
+  color: var(--gray-300);
+  vertical-align: middle;
+}
+
+/* 字段集 */
+.layui-elem-field {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  /* 注意：不能加 overflow:hidden，否则内部 select 下拉会被裁剪/遮挡 */
+  border: none;
+  animation: cardFadeIn .35s ease;
+  transition: box-shadow .25s ease;
+}
+.layui-elem-field:hover {
+  box-shadow: var(--shadow-md);
+}
+.layui-elem-field legend {
+  padding: 16px 20px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+.layui-field-box { padding: 16px 20px 20px; }
+
+/* 表格双列布局 */
+.table-two tbody td { text-align: left; }
+.table-two tbody th {
+  text-align: right;
+  width: 110px;
+  font-weight: 500;
+  color: var(--gray-500);
+  padding: 10px 12px;
+}
+.table-input input {
+  max-width: 60px;
+  text-align: center;
+  height: 30px;
+  padding: 0 4px;
+}
+
+/* 树形表格（栏目管理） */
+table.treetable { border: none !important; }
+table.treetable tr.tree-row-selected { background: var(--primary-bg); }
+
+/* ---------- 响应式 ---------- */
+.hidden-xs { display: none; }
+
+@media only screen and (max-width: 992px) {
+  .layui-body { padding: 16px !important; }
+  .layui-form-label { width: 80px; font-size: 13px; }
+  .layui-input-block { margin-left: 80px; }
+  .pic { margin-left: 80px; }
+}
+
+@media only screen and (max-width: 768px) {
+  .layui-layout-admin .layui-side { display: none; }
+  .layui-layout-admin .layui-body {
+    left: 0 !important;
+    padding: 12px !important;
+  }
+  .area-select { left: auto; right: 8px; }
+  .layui-form-label { width: 70px; font-size: 12px; }
+  .layui-input-block { margin-left: 70px; }
+  .pic { margin-left: 70px; }
+  .layui-hide-xs { display: none !important; }
+  .layui-layout-right .layui-nav-item > a { height: 32px; padding: 0 8px; }
+}
+
+@media only screen and (max-width: 480px) {
+  .layui-body { padding: 8px !important; }
+  .layui-tab-content { padding: 12px; }
+  .layui-table thead th,
+  .layui-table tbody td { padding: 6px 8px; font-size: 12px; }
+  .layui-form-item .layui-input-inline { margin-bottom: 8px; }
+}

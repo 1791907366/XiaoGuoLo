@@ -1,0 +1,10 @@
+# 缓存与日志
+runtime/
+*.log
+
+# 上传文件（本仓库不含，仅作占位）
+static/upload/
+
+# 系统文件
+Thumbs.db
+.DS_Store
