@@ -46,7 +46,7 @@ XiaoGuoLo
 
 [MIT](LICENSE) © 2026 XiaoGuoLo
 
-## 打赏二维
+## 打赏二维码
 
 <p align="center">
   <img src="/donate.png" width="380" alt="donate">
