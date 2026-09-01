@@ -45,3 +45,11 @@ XiaoGuoLo
 ## 📄 开源协议
 
 [MIT](LICENSE) © 2026 XiaoGuoLo
+
+## 打赏二维
+
+<p align="center">
+  <img src="/donate.png" width="380" alt="donate">
+</p>
+
+<p align="center"><strong>开发不易，你的支持让我走的更远</strong></p>
